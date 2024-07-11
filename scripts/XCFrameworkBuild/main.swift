@@ -43,14 +43,6 @@ private class BuildDav1d: BaseBuild {
         }
     }
 
-    override func build(platform: PlatformType, arch: ArchType) throws {
-        // // TODO: maccatalyst平台会导致ffmpeg编译失败，暂时忽略
-        // if platform == .maccatalyst {
-        //     return
-        // }
-        try super.build(platform: platform, arch: arch)
-    }
-
     override func arguments(platform _: PlatformType, arch _: ArchType) -> [String] {
         [
             "-Denable_tests=false",

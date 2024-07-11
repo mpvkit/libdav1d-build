@@ -117,16 +117,20 @@ class BaseBuild {
         directoryURL = URL.currentDirectory + "\(library.rawValue)-\(library.version)"
 
         if library.url.hasSuffix(".zip") {
-             // unzip builded static library
-            try? FileManager.default.removeItem(atPath: directoryURL.path)
-            try! FileManager.default.createDirectory(atPath: directoryURL.path, withIntermediateDirectories: true, attributes: nil)
-
+            // unzip builded static library
             let outputFileName = "\(library.rawValue).zip"
             let outputFile = directoryURL + outputFileName
-            if !FileManager.default.fileExists(atPath: (outputFile).path) {
-                try! Utility.launch(path: "wget", arguments: ["-O", outputFileName, library.url], currentDirectoryURL: directoryURL)
+            // delete invalid downloaded files
+            let attributes = try? FileManager.default.attributesOfItem(atPath: outputFile.path)
+            if let fileSize = attributes?[FileAttributeKey.size] as? UInt64, fileSize <= 0 {
+                try? FileManager.default.removeItem(atPath: directoryURL.path)
             }
-            try! Utility.launch(path: "/usr/bin/unzip", arguments: [outputFileName], currentDirectoryURL: directoryURL)
+            try! FileManager.default.createDirectory(atPath: directoryURL.path, withIntermediateDirectories: true, attributes: nil)
+
+            if !FileManager.default.fileExists(atPath: outputFile.path) {
+                try! Utility.launch(path: "wget", arguments: ["-O", outputFileName, library.url], currentDirectoryURL: directoryURL)
+                try! Utility.launch(path: "/usr/bin/unzip", arguments: [outputFileName], currentDirectoryURL: directoryURL)
+            }
         } else if !FileManager.default.fileExists(atPath: directoryURL.path) {
             // pull code from git
             try! Utility.launch(path: "/usr/bin/git", arguments: ["-c", "advice.detachedHead=false", "clone", "--depth", "1", "--branch", library.version, library.url, directoryURL.path])
@@ -664,6 +668,10 @@ class ZipBaseBuild : BaseBuild {
             for arch in architectures(platform) {
                 // restore lib
                 let srcThinLibPath = directoryURL + ["lib"] + [platform.rawValue, "thin", arch.rawValue, "lib"]
+                // ignore if platform not support
+                if !FileManager.default.fileExists(atPath: srcThinLibPath.path) {
+                    continue
+                }
                 let destThinPath = thinDir(platform: platform, arch: arch)
                 let destThinLibPath = destThinPath + ["lib"]
                 try? FileManager.default.createDirectory(atPath: destThinPath.path, withIntermediateDirectories: true, attributes: nil)

@@ -35,6 +35,9 @@ private class BuildDav1d: BaseBuild {
     init() {
         super.init(library: .libdav1d)
 
+        if Utility.shell("which ninja") == nil {
+            Utility.shell("brew install ninja")
+        }
         if Utility.shell("which nasm") == nil {
             Utility.shell("brew install nasm")
         }

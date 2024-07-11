@@ -12,7 +12,7 @@ jobs:
   build:
     permissions:
       contents: write
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
     - uses: actions/checkout@v4
 
@@ -21,6 +21,8 @@ jobs:
         brew install autoconf
         brew install automake
         brew install libtool
+        brew install meson
+        brew install ninja
         brew install nasm
 
     - name: Build

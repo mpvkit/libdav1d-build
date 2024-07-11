@@ -1043,8 +1043,11 @@ enum Utility {
             }
         } else {
             if let logURL = logURL {
-                if let content = String(data: try Data(contentsOf: logURL), encoding: .utf8) {
-                    print(content)
+                // print log when run in GitHub Action
+                if ProcessInfo.processInfo.environment.keys.contains("GITHUB_ACTION") {
+                    if let content = String(data: try Data(contentsOf: logURL), encoding: .utf8) {
+                        print(content)
+                    }
                 }
                 print("please view log file for detail: \(logURL)\n")
             }

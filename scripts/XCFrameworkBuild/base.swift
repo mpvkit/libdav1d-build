@@ -1043,6 +1043,9 @@ enum Utility {
             }
         } else {
             if let logURL = logURL {
+                if let content = String(data: try Data(contentsOf: logURL), encoding: .utf8) {
+                    print(content)
+                }
                 print("please view log file for detail: \(logURL)\n")
             }
             throw NSError(domain: "\(executableURL.lastPathComponent) execute failed", code: Int(task.terminationStatus))

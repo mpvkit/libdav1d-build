@@ -21,6 +21,8 @@ jobs:
         brew install autoconf
         brew install automake
         brew install libtool
+        brew install meson
+        brew install ninja
 
     - name: Build
       run: |

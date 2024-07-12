@@ -21,7 +21,7 @@ jobs:
         brew install autoconf
         brew install automake
         brew install libtool
-        brew install meson@1.4.1
+        brew install meson@1.4
         brew install ninja
         brew install nasm
 

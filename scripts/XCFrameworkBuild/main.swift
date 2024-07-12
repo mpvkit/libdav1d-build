@@ -45,8 +45,10 @@ private class BuildDav1d: BaseBuild {
 
     override func arguments(platform _: PlatformType, arch _: ArchType) -> [String] {
         [
+            "-Denable_asm=true",
             "-Denable_tests=false",
             "-Denable_tools=false", 
+            "-Denable_examples=false", 
             "-Dxxhash_muxer=disabled",
         ]
     }

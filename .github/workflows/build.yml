@@ -27,7 +27,7 @@ jobs:
 
     - name: Build
       run: |
-        make build
+        make build platforms=isimulator
     
     - name: Update Package.swift
       run: |

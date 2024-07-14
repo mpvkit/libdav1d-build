@@ -8,14 +8,24 @@ let package = Package(
     products: [
         .library(
             name: "Libdav1d", 
-            targets: ["Libdav1d"]
+            targets: ["_Libdav1d"]
         ),
     ],
     targets: [
+        // Need a dummy target to embedded correctly.
+        // https://github.com/apple/swift-package-manager/issues/6069
+        .target(
+            name: "_Libdav1d",
+            dependencies: ["Libdav1d"],
+            path: "Sources/_Dummy"
+        ),
+        //AUTO_GENERATE_TARGETS_BEGIN//
+
         .binaryTarget(
             name: "Libdav1d",
-            url: "https://github.com/mpvkit/libdav1d_build/releases/download/1.4.3/Libdav1d.xcframework.zip",
-            checksum: "369a6211f693e7637b60203facea85f810ae3b1ed4688fa47f59ba95e7fd3791"
-        )
+            url: "https://github.com/mpvkit/libdav1d-build/releases/download/1.4.3/Libdav1d.xcframework.zip",
+            checksum: "5db763f10d5bac53b779c2aaf2254fb5998a4c1375e112b99da2fd1ef4d05da0"
+        ),
+        //AUTO_GENERATE_TARGETS_END//
     ]
 )

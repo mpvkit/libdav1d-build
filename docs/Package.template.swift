@@ -8,14 +8,18 @@ let package = Package(
     products: [
         .library(
             name: "Libdav1d", 
-            targets: ["Libdav1d"]
+            targets: ["_Libdav1d"]
         ),
     ],
     targets: [
-        .binaryTarget(
-            name: "Libdav1d",
-            url: "\(Libdav1d_url)",
-            checksum: "\(Libdav1d_checksum)"
-        )
+        // Need a dummy target to embedded correctly.
+        // https://github.com/apple/swift-package-manager/issues/6069
+        .target(
+            name: "_Libdav1d",
+            dependencies: ["Libdav1d"],
+            path: "Sources/_Dummy"
+        ),
+        //AUTO_GENERATE_TARGETS_BEGIN//
+        //AUTO_GENERATE_TARGETS_END//
     ]
 )

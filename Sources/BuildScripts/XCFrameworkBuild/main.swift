@@ -28,6 +28,20 @@ enum Library: String, CaseIterable {
             return "https://github.com/videolan/dav1d"
         }
     }
+
+    // for generate Package.swift
+    var targets : [PackageTarget] {
+        switch self {
+        case .libdav1d:
+            return  [
+                .target(
+                    name: "Libdav1d",
+                    url: "https://github.com/mpvkit/libdav1d-build/releases/download/\(BaseBuild.options.releaseVersion)/Libdav1d.xcframework.zip",
+                    checksum: "https://github.com/mpvkit/libdav1d-build/releases/download/\(BaseBuild.options.releaseVersion)/Libdav1d.xcframework.checksum.txt"
+                ),
+            ]
+        }
+    }
 }
 
 

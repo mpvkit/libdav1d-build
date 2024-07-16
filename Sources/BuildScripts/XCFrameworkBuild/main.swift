@@ -59,7 +59,8 @@ private class BuildDav1d: BaseBuild {
 
     override func arguments(platform _: PlatformType, arch _: ArchType) -> [String] {
         [
-            "-Denable_asm=true",
+            "-Denable_asm=false",   // disable "No platform load command found" warning after xcode 15
+
             "-Denable_tests=false",
             "-Denable_tools=false", 
             "-Denable_examples=false", 

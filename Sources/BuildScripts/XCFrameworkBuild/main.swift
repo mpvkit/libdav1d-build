@@ -48,7 +48,12 @@ enum Library: String, CaseIterable {
 private class BuildDav1d: BaseBuild {
     init() {
         super.init(library: .libdav1d)
+    }
 
+    override func beforeBuild() throws {
+        try super.beforeBuild()
+
+        
         if Utility.shell("which ninja") == nil {
             Utility.shell("brew install ninja")
         }

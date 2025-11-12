@@ -80,6 +80,6 @@ jobs:
         files: |
           ./dist/release/*.txt
           ./dist/release/*.zip
-        prerelease: ${{ contains(env.RELEASE_VERSION, 'alpha') || contains(env.RELEASE_VERSION, 'beta') }}
+        prerelease: ${{ contains(env.RELEASE_VERSION, '-') }}
         generate_release_notes: true
         fail_on_unmatched_files: true

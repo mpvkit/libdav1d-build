@@ -1,6 +1,6 @@
 # libdav1d-build
 
-build scripts for [libdav1d](https://github.com/haasn/libdav1d)
+build scripts for [dav1d](https://github.com/videolan/dav1d)
 
 ## Installation
 

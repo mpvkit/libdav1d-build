@@ -23,8 +23,8 @@ let package = Package(
 
         .binaryTarget(
             name: "Libdav1d",
-            url: "https://github.com/mpvkit/libdav1d-build/releases/download/1.4.3-xcode26/Libdav1d.xcframework.zip",
-            checksum: "fc623e84c42bb2898cfd35ca4cc6306c029411d2dfd02ef9ea67301759f3001b"
+            url: "https://github.com/mpvkit/libdav1d-build/releases/download/1.5.2/Libdav1d.xcframework.zip",
+            checksum: "dcdd5cb82c3cf4729d555b3259d8202c61e3d7eaff11df76bf3d2db8ef7256d6"
         ),
         //AUTO_GENERATE_TARGETS_END//
     ]

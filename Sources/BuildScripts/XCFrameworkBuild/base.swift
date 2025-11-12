@@ -229,6 +229,7 @@ class BaseBuild {
                 "-DCMAKE_SYSTEM_PROCESSOR=\(arch.rawValue)",
                 "-DCMAKE_INSTALL_PREFIX=\(thinDirPath)",
                 "-DBUILD_SHARED_LIBS=0",
+                "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
             ]
             arguments.append(contentsOf: self.arguments(platform: platform, arch: arch))
             try Utility.launch(path: cmake, arguments: arguments, currentDirectoryURL: buildURL, environment: environ)

@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "libdav1d",
-    platforms: [.macOS(.v10_15), .iOS(.v13), .tvOS(.v13)],
+    platforms: [.macOS(.v11), .iOS(.v14), .tvOS(.v14)],
     products: [
         .library(
             name: "Libdav1d", 
@@ -24,7 +24,7 @@ let package = Package(
         .binaryTarget(
             name: "Libdav1d",
             url: "https://github.com/mpvkit/libdav1d-build/releases/download/1.5.3/Libdav1d.xcframework.zip",
-            checksum: "f27be1c0268a634322249724d3c3f4499dea73a6da14a5f509f11b879f7f68ed"
+            checksum: "d1a32ae6a1f0193e9f05c44c9176844af7f6d2a58cb33843f6f1b8dfd9224083"
         ),
         //AUTO_GENERATE_TARGETS_END//
     ]

@@ -18,7 +18,7 @@ enum Library: String, CaseIterable {
     var version: String {
         switch self {
         case .libdav1d:    // AV1 decoding
-            return "1.5.2"
+            return "1.5.3"
         }
     }
 

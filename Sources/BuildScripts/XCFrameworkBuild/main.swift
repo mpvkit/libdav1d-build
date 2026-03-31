@@ -1,19 +1,16 @@
 import Foundation
-import Darwin
+import BuildShared
 
 do {
-    let options = try ArgumentOptions.parse(CommandLine.arguments)
-    try Build.performCommand(options)
-
-
-    try BuildDav1d().buildALL()
+    let options = try BuildRunner.performCommand()
+    try BuildDav1d(options: options).buildALL()
 } catch {
     print(error.localizedDescription)
     exit(1)
 }
 
 
-enum Library: String, CaseIterable {
+enum Library: String, CaseIterable, BuildLibrary {
     case libdav1d
     var version: String {
         switch self {
@@ -36,8 +33,8 @@ enum Library: String, CaseIterable {
             return  [
                 .target(
                     name: "Libdav1d",
-                    url: "https://github.com/mpvkit/libdav1d-build/releases/download/\(BaseBuild.options.releaseVersion)/Libdav1d.xcframework.zip",
-                    checksum: "https://github.com/mpvkit/libdav1d-build/releases/download/\(BaseBuild.options.releaseVersion)/Libdav1d.xcframework.checksum.txt"
+                    url: "https://github.com/mpvkit/libdav1d-build/releases/download/\(BuildRunner.options!.releaseVersion)/Libdav1d.xcframework.zip",
+                    checksum: "https://github.com/mpvkit/libdav1d-build/releases/download/\(BuildRunner.options!.releaseVersion)/Libdav1d.xcframework.checksum.txt"
                 ),
             ]
         }
@@ -46,8 +43,8 @@ enum Library: String, CaseIterable {
 
 
 private class BuildDav1d: BaseBuild {
-    init() {
-        super.init(library: .libdav1d)
+    init(options: ArgumentOptions) {
+        super.init(library: .libdav1d, options: options)
     }
 
     override func beforeBuild() throws {

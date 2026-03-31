@@ -28,7 +28,9 @@ enum Library: String, CaseIterable, BuildLibrary {
 
     // for generate Package.swift
     var targets : [PackageTarget] {
-        let releaseVersion = BuildRunner.options?.releaseVersion ?? version
+        guard let releaseVersion = BuildRunner.options?.releaseVersion else {
+            preconditionFailure("BuildRunner options are not initialized")
+        }
         switch self {
         case .libdav1d:
             return  [
